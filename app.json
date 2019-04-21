@@ -1,9 +1,9 @@
 {
-  "name": "Holochain App Name",
-  "description": "A Holochain app",
+  "name": "Holochain Point of Interest Demo",
+  "description": "Save and display points of interest on map",
   "authors": [
     {
-      "identifier": "Author Name <author@name.com>",
+      "identifier": "vanarchist <v4narchist@gmail.com>",
       "public_key_source": "",
       "signature": ""
     }

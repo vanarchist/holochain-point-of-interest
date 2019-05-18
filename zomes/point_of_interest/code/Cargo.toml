@@ -8,9 +8,13 @@ edition = "2018"
 serde = "=1.0.89"
 serde_json = { version = "=1.0.39", features = ["preserve_order"] }
 serde_derive = "=1.0.89"
-hdk = { git = "https://github.com/holochain/holochain-rust", tag = "v0.0.10-alpha2" }
-holochain_wasm_utils = { git = "https://github.com/holochain/holochain-rust", tag = "v0.0.10-alpha2" }
-holochain_core_types_derive = { git = "https://github.com/holochain/holochain-rust", tag = "v0.0.10-alpha2" }
+hdk = { git = "https://github.com/holochain/holochain-rust", tag = "v0.0.12-alpha1" }
+holochain_wasm_utils = { git = "https://github.com/holochain/holochain-rust", tag = "v0.0.12-alpha1" }
+holochain_core_types_derive = { git = "https://github.com/holochain/holochain-rust", tag = "v0.0.12-alpha1" }
+geojson = "*"
+holochain-collections = { git = "https://github.com/willemolding/holochain-collections" }
+geohash = { git = "https://github.com/georust/geohash" }
+
 
 [lib]
 path = "src/lib.rs"

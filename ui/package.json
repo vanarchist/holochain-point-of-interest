@@ -1,0 +1,16 @@
+{
+  "name": "point_of_interest",
+  "version": "1.0.0",
+  "description": "Point of interest demo",
+  "main": "point_of_interest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify point_of_interest.js -o bundle.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@holochain/hc-web-client": "^0.4.0",
+    "leaflet": "^1.5.1"
+  }
+}

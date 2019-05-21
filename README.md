@@ -28,3 +28,8 @@ hc run
 ```
 Open index.html in your browser.
 
+## Tests
+Tests can be run with the holochain hc command.
+```
+hc test
+```

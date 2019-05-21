@@ -137,3 +137,40 @@ define_zome! {
         hc_public [get_all_points, add_point]
     }
 }
+
+#[cfg(test)]
+mod tests {
+
+    extern crate geojson;
+    extern crate serde_json;
+    extern crate holochain_collections;
+    use geojson::{Feature, Geometry, Value};
+    use serde_json::{Map, to_value};
+    use holochain_collections::bucket_set::{BucketSetStorable };
+    use super::*;
+
+    #[test]
+    fn test_derive_bucket_id_geohash_correct() {
+        let geometry = Geometry::new(
+            Value::Point(vec![-120.66029,35.2812])
+        );
+
+        let mut properties = Map::new();
+        properties.insert(
+            String::from("name"),
+            to_value("Firestone Grill").unwrap(),
+        );
+
+        let feature = Feature {
+            bbox: None,
+            geometry: Some(geometry),
+            id: None,
+            properties: Some(properties),
+            foreign_members: None,
+        };
+
+        let point = PointOfInterest(feature);
+
+        assert_eq!(BucketSetStorable::derive_bucket_id(&point), "9");
+    }
+}

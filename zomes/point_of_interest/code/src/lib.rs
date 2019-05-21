@@ -42,7 +42,6 @@ impl BucketSetStorable for PointOfInterest {
         match value {
             // If we were given a point geometry
             geojson::Value::Point(value) => {
-                println!("value: {:?}", value[0]);
                 // encode lat/lng to geohash
                 let c = Coordinate { x: value[0], y: value[1] };
                 // use first char of geohash as bucket index (32 buckets)
@@ -72,12 +71,12 @@ impl BucketIterable for PointOfInterest {
 pub struct PointsOfInterest(FeatureCollection);
 
 // save point to bucket based on geographic location
-pub fn handle_create_point_of_interest(entry: PointOfInterest) -> ZomeApiResult<Address> {
+pub fn handle_add_point(entry: PointOfInterest) -> ZomeApiResult<Address> {
     bucket_set::store("point_of_interest".into(), entry)
 }
 
 // return a wrapped geojson::FeatureCollection of all points to client
-pub fn handle_load_points() -> ZomeApiResult<PointsOfInterest> {
+pub fn handle_get_all_points() -> ZomeApiResult<PointsOfInterest> {
 
     let points = bucket_set::retrieve_all::<PointOfInterest>("point_of_interest".into()).unwrap();
     let mut features: Vec<Feature> = Vec::new();
@@ -122,19 +121,19 @@ define_zome! {
     genesis: || { Ok(()) }
 
     functions: [
-        create_point_of_interest: {
+        add_point: {
             inputs: |entry: PointOfInterest|,
             outputs: |result: ZomeApiResult<Address>|,
-            handler: handle_create_point_of_interest
+            handler: handle_add_point
         }
-        load_points: {
+        get_all_points: {
             inputs: | |,
             outputs: |result: ZomeApiResult<PointsOfInterest>|,
-            handler: handle_load_points
+            handler: handle_get_all_points
         }
     ]
 
     traits: {
-        hc_public [load_points, create_point_of_interest]
+        hc_public [get_all_points, add_point]
     }
 }

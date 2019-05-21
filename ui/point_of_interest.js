@@ -27,7 +27,7 @@ function onMapClick(e) {
     
     // save to holochain
     connection.then(({ callZome }) => {
-    callZome('test-instance', 'point_of_interest', 'create_point_of_interest')({"entry": geojsonFeature}).then((result) => console.log(JSON.parse(result)))
+    callZome('test-instance', 'point_of_interest', 'add_point')({"entry": geojsonFeature}).then((result) => console.log(JSON.parse(result)))
     })
     
 }
@@ -51,7 +51,7 @@ window.onload = function() {
     // load saved points from holochain
     connection = connect("ws://localhost:8888")
     connection.then(({ callZome }) => {
-    callZome('test-instance', 'point_of_interest', 'load_points')({"args":{}}).then((result) => addPoints(JSON.parse(result)))
+    callZome('test-instance', 'point_of_interest', 'get_all_points')({"args":{}}).then((result) => addPoints(JSON.parse(result)))
 })
 
 }
